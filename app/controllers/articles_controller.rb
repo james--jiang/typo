@@ -254,6 +254,7 @@ class ArticlesController < ContentController
     parts
   end
 
+
   def match_permalink_format parts, format
     specs = format.split('/')
     specs.delete('')

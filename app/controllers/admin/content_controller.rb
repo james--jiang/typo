@@ -52,6 +52,16 @@ class Admin::ContentController < Admin::BaseController
     redirect_to :action => 'index'
   end
 
+  def merge
+    if current_user.admin?
+      articleOne = Article.find(params[:id])
+      mergedArticles = articleOne.merge_with(params[:article_id])
+      deleteArticle = Article.find(params[:article_id])
+      deleteArticle.destroy
+      redirect_to admin_content_path
+    end
+  end
+
   def insert_editor
     editor = 'visual'
     editor = 'simple' if params[:editor].to_s == 'simple'
