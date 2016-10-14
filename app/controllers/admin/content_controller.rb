@@ -53,10 +53,10 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    if current_user.admin? and !params[:article_id].blank?
+    if current_user.admin? and !params[:merge_with].blank?
       articleOne = Article.find(params[:id])
-      mergedArticles = articleOne.merge_with(params[:article_id])
-      deleteArticle = Article.find(params[:article_id])
+      mergedArticles = articleOne.merge_with(params[:merge_with])
+      deleteArticle = Article.find(params[:merge_with])
       deleteArticle.destroy
       redirect_to admin_content_path
     end
