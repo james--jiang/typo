@@ -53,13 +53,16 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    if current_user.admin? and !params[:merge_with].blank?
-      articleOne = Article.find(params[:id])
-      mergedArticles = articleOne.merge_with(params[:merge_with])
-      deleteArticle = Article.find(params[:merge_with])
-      deleteArticle.destroy
-      redirect_to admin_content_path
+    if current_user.admin?
+      if params[:id] != params[:merge_with]
+        if !params[:merge_with].nil?
+          @articleOne = Article.find(params[:id])
+          @articleOne.merge_with(params[:merge_with])
+          Article.find(params[:merge_with]).destroy
+        end
+      end
     end
+    redirect_to admin_content_path
   end
 
   def insert_editor
