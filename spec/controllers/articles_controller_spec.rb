@@ -707,6 +707,9 @@ describe ArticlesController, "assigned keywords" do
     assigns(:keywords).should == category.name
   end
 
+
+
+
   it 'article with neither categories nor tags should not have meta keywords' do
     @blog.permalink_format = '/%title%.html'
     @blog.save

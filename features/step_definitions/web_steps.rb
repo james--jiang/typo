@@ -126,6 +126,7 @@ When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field)
 end
 
+
 When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
   attach_file(field, File.expand_path(path))
 end
@@ -280,3 +281,10 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+User.create!({:login => 'joe',
+                :password => 'aaaaaaaa',
+                :email => 'joe@snow1.com',
+                :profile_id => 2,
+                :name => 'joe',
+                :state => 'active'})

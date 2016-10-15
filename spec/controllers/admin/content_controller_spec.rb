@@ -659,6 +659,31 @@ describe Admin::ContentController do
       end
     end
 
+    it 'articles should be able to merge' do
+      article = Factory(:article)
+      articleTwo = Factory(:article, :permalink => 'second-blog-article',
+                          :published_at => '2004-04-01 02:00:00',
+                          :updated_at => '2004-04-01 02:00:00',
+                          :created_at => '2004-04-01 02:00:00')
+      article.merge_with(articleTwo)
+      article.should_not be_nil
+
+    end
+
+    it 'multiple articles should be able to merge' do
+      article = Factory(:article)
+      articleTwo = Factory(:article, :permalink => 'second-blog-article',
+                          :published_at => '2004-04-01 02:00:00',
+                          :updated_at => '2004-04-01 02:00:00',
+                          :created_at => '2004-04-01 02:00:00')
+      articleThree = Factory(:article, :permalink => 'third-blog-article',
+                          :published_at => '2004-04-01 02:00:00',
+                          :updated_at => '2004-04-01 02:00:00',
+                          :created_at => '2004-04-01 02:00:00')
+      articleFour = article.merge_with(articleTwo)
+      articleThree.merge_with(articleFour)
+      articleThree.should_not be_nil
+    end
     describe 'destroy action can be access' do
 
       it 'should redirect when want destroy article' do
