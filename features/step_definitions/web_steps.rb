@@ -85,6 +85,10 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
+When /^(?:|I ) fill in "([^"]*)" with converted value of "([^"]*)"$/ do |field, value|
+  fill_in(field, :with => Article.find_by_title(value).id)
+end
+
 When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
   fill_in(field, :with => value)
 end
